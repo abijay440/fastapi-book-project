@@ -1,9 +1,9 @@
 name: CI Pipeline
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
+    branches: [ main ]
+  push:
     branches: [ main ]
 
 jobs:
@@ -11,6 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - name: Remove BOM from main.py if present
+        run: sed -i '1 s/^\xef\xbb\xbf//' main.py
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
@@ -21,4 +23,3 @@ jobs:
           pip install -r requirements.txt
       - name: Run tests
         run: pytest
-
