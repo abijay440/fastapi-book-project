@@ -22,7 +22,7 @@ jobs:
       - name: Deploy Application
         run: |
           ssh ubuntu@${{ secrets.EC2_IP }} << 'EOF' 
-            cd fastapi-app 
+            cd fastapi-book-project 
             git pull origin main
             python3 -m venv venv
             source venv/bin/activate
